@@ -8,6 +8,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const serveClient = require("./serveClient");
 
 const app = express();
 
@@ -20,6 +21,9 @@ app.use("/uploads", express.static("uploads")); // serve static PDF files
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", noteRoutes);
 app.use("/api/admin", adminRoutes);
+if (process.env.NODE_ENV === "production") {
+  serveClient(app); 
+}
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
