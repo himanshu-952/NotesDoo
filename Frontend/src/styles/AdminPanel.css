@@ -1,0 +1,85 @@
+
+.admin-panel {
+  padding: 2.5rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f1f5f9; /* light slate-100 */
+  min-height: 100vh;
+}
+
+
+.notes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+
+.note-card {
+  width: 300px;
+  padding: 1.5rem;
+  background: white;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+.note-card p {
+  margin: 0.4rem 0;
+  font-size: 15px;
+  color: #334155; /* slate-700 */
+}
+
+
+.note-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #3b82f6; /* blue-500 */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.note-card a:hover {
+  color: #2563eb; 
+  text-decoration: underline;
+}
+
+
+.note-card button {
+  margin-top: 0.8rem;
+  background: linear-gradient(135deg, #ef4444, #dc2626); /* red gradient */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.note-card button:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: scale(1.05);
+}
+
+
+.message {
+  color: #16a34a; 
+  font-weight: 600;
+  background-color: #dcfce7;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}

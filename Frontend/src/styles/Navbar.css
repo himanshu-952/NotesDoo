@@ -1,0 +1,79 @@
+.navbar {
+  background-color: #1e3a8a; 
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar a {
+  position: relative;
+  color: #ffffff;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px; 
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.navbar a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  padding: 2px;
+  background: linear-gradient(135deg, #60a5fa, #818cf8); 
+  
+
+ 
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: -1;
+}
+
+.navbar a:hover {
+  color: #e0e7ff;
+  transform: translateY(-1px);
+}
+
+.navbar a.active {
+  background-color: #3b82f6; 
+  color: white;
+}
+
+
+.navbar button {
+  background: #ef4444; 
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.navbar button:hover {
+  background: #dc2626; 
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    margin: 8px 0;
+  }
+}
