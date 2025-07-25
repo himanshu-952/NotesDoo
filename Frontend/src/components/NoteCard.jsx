@@ -6,7 +6,7 @@ const NoteCard = ({ note }) => {
       <p><strong>Description:</strong> {note.description}</p>
       <p><strong>Uploaded by:</strong> {note.uploadedBy?.username || note.uploadedBy?.email}</p>
       <a
-        href={`http://localhost:5000${note.fileUrl}`}
+        href={`https://notesdoo-backend.onrender.com${note.fileUrl}`}
         target="_blank"
         rel="noopener noreferrer"
         className="download-btn"
