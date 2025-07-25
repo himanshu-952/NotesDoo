@@ -66,7 +66,7 @@ const UploadNotesPage = () => {
       formData.append('pdf', file);
 
       const res = await axios.post(
-        'http://localhost:5000/api/notes/upload',
+        'https://notesdoo-backend.onrender.com/api/notes/upload',
         formData,
         {
           headers: {

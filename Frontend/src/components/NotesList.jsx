@@ -10,7 +10,7 @@ const NotesList = ({ selectedClass, selectedSubject }) => {
     const fetchNotes = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/notes/${selectedClass}/${selectedSubject}`
+          `https://notesdoo-backend.onrender.com/api/notes/${selectedClass}/${selectedSubject}`
         )
         setNotes(res.data)
       } catch (err) {
@@ -40,7 +40,7 @@ const NotesList = ({ selectedClass, selectedSubject }) => {
             <div className="note-card" key={note._id}>
               <h4>{note.description}</h4>
               <p><strong>Uploaded by:</strong> {note.uploadedBy?.email}</p>
-              <a href={`http://localhost:5000${note.fileUrl}`} target="_blank">📄 View PDF</a>
+              <a href={`https://notesdoo-backend.onrender.com${note.fileUrl}`} target="_blank">📄 View PDF</a>
             </div>
           ))
         ) : (

@@ -30,7 +30,7 @@ const GetNotesPage = () => {
           setError(null);
 
           const res = await axios.get(
-            `http://localhost:5000/api/notes?noteClass=${selectedClass}&subject=${selectedSubject}`
+            `https://notesdoo-backend.onrender.com/api/notes?noteClass=${selectedClass}&subject=${selectedSubject}`
           );
 
           setNotes(res.data || []);

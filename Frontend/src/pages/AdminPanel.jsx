@@ -9,7 +9,7 @@ const AdminPanel = () => {
   const fetchNotes = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/admin/notes', {
+      const res = await axios.get('https://notesdoo-backend.onrender.com/api/admin/notes', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -24,7 +24,7 @@ const AdminPanel = () => {
   const deleteNote = async (noteId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/admin/delete/${noteId}`, {
+      await axios.delete(`https://notesdoo-backend.onrender.com/api/admin/delete/${noteId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,7 +55,7 @@ const AdminPanel = () => {
               <p><strong>Subject:</strong> {note.subject}</p>
               <p><strong>Description:</strong> {note.description}</p>
               <p><strong>Uploaded by:</strong> {note.uploadedBy?.email || 'Unknown'}</p>
-              <a href={`http://localhost:5000${note.fileUrl}`} target="_blank" rel="noreferrer">📄 View PDF</a>
+              <a href={`https://notesdoo-backend.onrender.com${note.fileUrl}`} target="_blank" rel="noreferrer">📄 View PDF</a>
               <button onClick={() => deleteNote(note._id)}>Delete</button>
             </div>
           ))}

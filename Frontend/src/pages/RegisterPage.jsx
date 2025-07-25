@@ -15,7 +15,7 @@ const RegisterPage = () => {
     setMessage('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', {
+      const res = await axios.post('https://notesdoo-backend.onrender.com/api/auth/signup', {
         email,
         username,
         password

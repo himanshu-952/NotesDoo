@@ -39,7 +39,7 @@
 
 
 .auth-page button {
-  background: linear-gradient(135deg, #3b82f6, #2563eb); /* blue gradient */
+  background: linear-gradient(135deg, #3b82f6, #2563eb); 
   color: white;
   padding: 12px 20px;
   border: none;
