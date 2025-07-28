@@ -6,7 +6,7 @@ const NoteCard = ({ note }) => {
       <p><strong>Description:</strong> {note.description}</p>
       <p><strong>Uploaded by:</strong> {note.uploadedBy?.username || note.uploadedBy?.email}</p>
 
-      {/* View PDF in browser tab */}
+      
       <a
         href={note.fileUrl}
         target="_blank"
