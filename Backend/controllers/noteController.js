@@ -19,7 +19,7 @@ const uploadNote = async (req, res) => {
    const result = await cloudinary.uploader.upload(file64.content, {
   folder: "notesdoo",
   resource_type: "raw", 
-  public_id: path.parse(req.file.originalname).name 
+  public_id: path.parse(req.file.originalname).name+".pdf" 
 });
 
 
