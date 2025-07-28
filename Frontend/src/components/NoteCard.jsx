@@ -1,3 +1,4 @@
+import '../styles/NoteCard.css'
 const NoteCard = ({ note }) => {
   return (
     <div className="note-card">
