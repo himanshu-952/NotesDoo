@@ -14,6 +14,7 @@ const NoteCard = ({ note }) => {
       <p><strong>Uploaded by:</strong> {note.uploadedBy?.username || note.uploadedBy?.email}</p>
       <a
         href={downloadUrl}
+        download
         className="download-btn"
       >
         📥 Download PDF
