@@ -1,4 +1,4 @@
-
+const fs = require('fs');
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -10,6 +10,9 @@ const noteRoutes = require("./routes/noteRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
 
 // Middlewares
 app.use(cors());

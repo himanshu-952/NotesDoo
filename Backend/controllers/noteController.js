@@ -8,6 +8,8 @@ const uploadNote = async (req, res) => {
 if (!req.file) {
   return res.status(400).json({ msg: "PDF file is required" });
 }
+console.log("Request Body:", req.body);
+  console.log("Uploaded File:", req.file);
 
 try {
   const newNote = await Note.create({ 
