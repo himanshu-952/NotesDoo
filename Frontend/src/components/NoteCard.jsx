@@ -1,11 +1,12 @@
 import '../styles/NoteCard.css';
 
 const NoteCard = ({ note }) => {
-  const fileUrlParts = note.fileUrl.split('/upload/');
-  const publicId = fileUrlParts[1];
-
   const filename = `note-${note._id}.pdf`;
-  const downloadUrl = `${fileUrlParts[0]}/upload/fl_attachment:${filename}/${publicId}`;
+
+  const downloadUrl = note.fileUrl.replace(
+    '/upload/',
+    `/upload/fl_attachment:${filename}/`
+  );
 
   return (
     <div className="note-card">
@@ -14,7 +15,6 @@ const NoteCard = ({ note }) => {
       <a
         href={downloadUrl}
         className="download-btn"
-        download
       >
         📥 Download PDF
       </a>
