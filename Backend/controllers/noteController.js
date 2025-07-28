@@ -1,33 +1,41 @@
 const Note = require("../models/Note");
 const User = require("../models/User");
+const cloudinary = require("../cloudinary");
+const DatauriParser = require("datauri/parser");
+const path = require("path");
 
-// Upload a note 
+const parser = new DatauriParser();
+
 const uploadNote = async (req, res) => {
   const { noteClass, subject, description } = req.body;
 
-if (!req.file) {
-  return res.status(400).json({ msg: "PDF file is required" });
-}
-console.log("Request Body:", req.body);
-  console.log("Uploaded File:", req.file);
+  if (!req.file) {
+    return res.status(400).json({ msg: "PDF file is required" });
+  }
 
-try {
-  const newNote = await Note.create({ 
-    noteClass,       
-    subject, 
-    description,
-    fileUrl: `/uploads/${req.file.filename}`,
-    uploadedBy: req.user._id,
-  });
+  try {
+    const file64 = parser.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
+    const result = await cloudinary.uploader.upload(file64.content, {
+      resource_type: "raw", // for PDF
+      folder: "notesdoo"
+    });
 
-    console.log("Note Uploaded", newNote);
+    const newNote = await Note.create({
+      noteClass,
+      subject,
+      description,
+      fileUrl: result.secure_url,
+      uploadedBy: req.user._id,
+    });
+
     res.status(201).json({ msg: "Note uploaded", note: newNote });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
+
 
 
 // Get all notes with optional filters

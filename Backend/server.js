@@ -10,14 +10,12 @@ const noteRoutes = require("./routes/noteRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
-if (!fs.existsSync('uploads')) {
-  fs.mkdirSync('uploads');
-}
+
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads")); // serve static PDF files
+
 
 // Routes
 app.use("/api/auth", authRoutes);
