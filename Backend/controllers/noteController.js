@@ -16,12 +16,10 @@ const uploadNote = async (req, res) => {
   try {
     const file64 = parser.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
-   const result = await cloudinary.uploader.upload(file64.content, {
-  folder: "notesdoo",
-  resource_type: "raw", 
-  public_id: path.parse(req.file.originalname).name+".pdf" 
-});
-
+    const result = await cloudinary.uploader.upload(file64.content, {
+      resource_type: "raw", // for PDF
+      folder: "notesdoo"
+    });
 
     const newNote = await Note.create({
       noteClass,
@@ -37,7 +35,6 @@ const uploadNote = async (req, res) => {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
-
 
 
 // Get all notes with optional filters
