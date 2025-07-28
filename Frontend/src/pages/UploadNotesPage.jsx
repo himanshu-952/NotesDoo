@@ -35,7 +35,7 @@ const UploadNotesPage = () => {
   const classOptions = ['10', '11', '12', 'CSE' ,'Neet' , 'JEE'];
   const subjectOptions = {
     '10': ['Maths', 'Science', 'English' , 'Social Science' , 'Hindi'],
-    '11': ['Physics', 'Chemistry', 'Maths' , 'Biology' , , 'Accounts' , 'Buisness' , 'Poltical Science' , 'Geography' , 'History'],
+    '11': ['Physics', 'Chemistry', 'Maths' , 'Biology' ,  'Accounts' , 'Buisness' , 'Poltical Science' , 'Geography' , 'History'],
     '12': ['Biology', 'Economics', 'Maths' , 'Physics' , 'Chemistry' , 'Accounts' , 'Buisness' , 'Poltical Science' , 'Geography' , 'History'],
     'CSE': ['DSA', 'DBMS', 'OS', 'CN'],
     'Neet':['Physics' , 'Chemistry' , 'Biology'],

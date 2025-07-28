@@ -3,10 +3,10 @@ import '../styles/NoteCard.css';
 const NoteCard = ({ note }) => {
   const filename = `note-${note._id}.pdf`;
 
-  const downloadUrl = note.fileUrl.replace(
-    '/upload/',
-    `/upload/fl_attachment:${filename}/`
-  );
+ const downloadUrl = note.fileUrl.includes("cloudinary")
+  ? note.fileUrl.replace('/upload/', `/upload/fl_attachment:note-${note._id}.pdf/`)
+  : note.fileUrl;
+
 
   return (
     <div className="note-card">

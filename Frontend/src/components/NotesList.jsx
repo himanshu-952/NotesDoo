@@ -40,7 +40,8 @@ const NotesList = ({ selectedClass, selectedSubject }) => {
             <div className="note-card" key={note._id}>
               <h4>{note.description}</h4>
               <p><strong>Uploaded by:</strong> {note.uploadedBy?.email}</p>
-              <a href={`https://notesdoo-backend.onrender.com${note.fileUrl}`} target="_blank">📄 View PDF</a>
+              <a href={note.fileUrl} target="_blank" rel="noopener noreferrer">📄 View PDF</a>
+
             </div>
           ))
         ) : (

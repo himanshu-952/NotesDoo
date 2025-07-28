@@ -55,7 +55,8 @@ const AdminPanel = () => {
               <p><strong>Subject:</strong> {note.subject}</p>
               <p><strong>Description:</strong> {note.description}</p>
               <p><strong>Uploaded by:</strong> {note.uploadedBy?.email || 'Unknown'}</p>
-              <a href={`https://notesdoo-backend.onrender.com${note.fileUrl}`} target="_blank" rel="noreferrer">📄 View PDF</a>
+             <a href={note.fileUrl} target="_blank" rel="noopener noreferrer">📄 View PDF</a>
+
               <button onClick={() => deleteNote(note._id)}>Delete</button>
             </div>
           ))}
