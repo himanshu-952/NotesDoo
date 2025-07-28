@@ -14,26 +14,21 @@ const uploadNote = async (req, res) => {
   }
 
   try {
-    // Convert file buffer to base64 with full MIME prefix
     const file64 = parser.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
-    // 👇 Add MIME prefix manually
-    const pdfBase64 = `data:application/pdf;base64,${file64.content.split(",")[1]}`;
+   const result = await cloudinary.uploader.upload(file64.content, {
+  folder: "notesdoo",
+  resource_type: "raw", 
+  public_id: path.parse(req.file.originalname).name+".pdf" 
+});
 
-    // Upload to Cloudinary
-    const result = await cloudinary.uploader.upload(pdfBase64, {
-      folder: "notesdoo",
-      resource_type: "raw",
-      public_id: path.parse(req.file.originalname).name + ".pdf"
-    });
 
-    // Save note in MongoDB
     const newNote = await Note.create({
       noteClass,
       subject,
       description,
       fileUrl: result.secure_url,
-      uploadedBy: req.user._id
+      uploadedBy: req.user._id,
     });
 
     res.status(201).json({ msg: "Note uploaded", note: newNote });
@@ -41,4 +36,56 @@ const uploadNote = async (req, res) => {
     console.error(err);
     res.status(500).json({ msg: "Server error", error: err.message });
   }
+};
+
+
+
+// Get all notes with optional filters
+const getNotes = async (req, res) => {
+  try {
+    const { class: className, subject, username } = req.query;
+   console.log("Incoming query:", req.query);
+
+    let query = {};
+
+    if (className) query.noteClass = className;
+    if (subject) query.subject = subject;
+
+    if (username) {
+      const user = await User.findOne({ name: username });
+      if (user) {
+        query.uploadedBy = user._id;
+      } else {
+        return res.status(404).json({ msg: "No notes found for this username" });
+      }
+    }
+
+    const notes = await Note.find(query).populate("uploadedBy", "name email");
+    res.json(notes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Failed to fetch notes" });
+  }
+};
+
+// Admin delete note by ID
+const deleteNote = async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).json({ msg: "Note not found" });
+    }
+
+    await note.deleteOne();
+    res.json({ msg: "Note deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+};
+
+module.exports = {
+  uploadNote,
+  getNotes,
+  deleteNote
 };
