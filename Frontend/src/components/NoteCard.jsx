@@ -10,6 +10,7 @@ const NoteCard = ({ note }) => {
         target="_blank"
         rel="noopener noreferrer"
         className="download-btn"
+        download={`note-${note._id}.pdf`}
       >
         📥 Download PDF
       </a>
