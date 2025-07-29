@@ -14,11 +14,17 @@ const uploadNote = async (req, res) => {
   }
 
   try {
-    const file64 = parser.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+    const originalName = req.file.originalname;
+    const file64 = parser.format(path.extname(originalName).toString(), req.file.buffer);
+
+    const fileNameWithoutExt = path.parse(originalName).name;
 
     const result = await cloudinary.uploader.upload(file64.content, {
-      resource_type: "raw", // for PDF
-      folder: "notesdoo"
+      resource_type: "raw",        
+      folder: "notesdoo",
+      use_filename: true,          
+      public_id: fileNameWithoutExt, 
+      format: "pdf",              
     });
 
     const newNote = await Note.create({
