@@ -14,17 +14,20 @@ const uploadNote = async (req, res) => {
   }
 
   try {
-    const originalName = req.file.originalname;
-    const file64 = parser.format(path.extname(originalName).toString(), req.file.buffer);
+    const file64 = parser.format(
+      path.extname(req.file.originalname).toString(),
+      req.file.buffer
+    );
 
-    const fileNameWithoutExt = path.parse(originalName).name;
+    // Create a clean filename (e.g., subject-class.pdf)
+    const safeFileName = `${subject.toLowerCase().replace(/\s+/g, "-")}-for-class-${noteClass}.pdf`;
 
     const result = await cloudinary.uploader.upload(file64.content, {
-      resource_type: "raw",        
+      resource_type: "raw", // for PDF
       folder: "notesdoo",
-      use_filename: true,          
-      public_id: fileNameWithoutExt, 
-      format: "pdf",              
+      public_id: safeFileName.replace(".pdf", ""), // Don't add .pdf in public_id, Cloudinary handles it
+      use_filename: true,
+      unique_filename: false,
     });
 
     const newNote = await Note.create({
@@ -41,6 +44,7 @@ const uploadNote = async (req, res) => {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 };
+
 
 
 // Get all notes with optional filters
